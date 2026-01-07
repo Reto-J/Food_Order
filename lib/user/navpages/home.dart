@@ -10,8 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-   @override
+  @override
   void initState() {
     loadRestaurants();
     super.initState();
@@ -19,7 +18,7 @@ class _HomeState extends State<Home> {
 
   List<dynamic> restaurants = [];
 
-  void loadUser()async{
+  void loadUser() async {
     try {
       Map<String, dynamic> user = await ServerHelper().getUser();
       setState(() {
@@ -42,7 +41,9 @@ class _HomeState extends State<Home> {
         print("something went wrong");
       } else {
         setState(() {
-          restaurants = wait;
+          restaurants = wait
+              .where((cat) => cat["role"] == "Usertype.restaurant")
+              .toList();
         });
       }
     } catch (e) {
@@ -63,7 +64,7 @@ class _HomeState extends State<Home> {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 15),
+            padding: const EdgeInsets.fromLTRB(15, 50, 15, 15),
             child: Column(
               children: [
                 Row(
@@ -86,11 +87,37 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hello, NAME",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "You have 8 restaurants close to your current location",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
                     itemCount: restaurants.length,
                     itemBuilder: (context, index) {
-                      return Card(child: Text(restaurants[index]["name"]));
+                      return Card(
+                        child: ListTile(
+                          leading: Text(restaurants[index]["name"]),
+                        ),
+                      );
                     },
                   ),
                 ),
