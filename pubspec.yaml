@@ -31,7 +31,8 @@ dependencies:
   toastification:
   image_picker: 1.0.4
   shared_preferences: 2.2.2 
-  http:
+  flutter_secure_storage: 
+  dio:
   flutter:
     sdk: flutter
 
