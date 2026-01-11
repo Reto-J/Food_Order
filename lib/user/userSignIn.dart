@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/helper/serverHelper.dart';
 import 'package:food_order/toastification/error.dart';
+import 'package:food_order/toastification/sucess.dart';
 import 'package:food_order/user/homepage.dart';
 import 'package:food_order/user/usersignup.dart';
 import 'package:food_order/widget/customTextField.dart';
@@ -20,12 +21,19 @@ class _UserSigninState extends State<UserSignin> {
 
   void login()async{
     //Login function
-    int ty = await ServerHelper().logUserIn(emailController.text, passwordController.text);
+
+    try {
+          int ty = await ServerHelper().logUserIn(emailController.text, passwordController.text);
 
     if (ty == 200) {
+      showSucessMessage(context, "Login Sucessful 👍👍👍");
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Homepage()));
     } else{
       showErrorMessage(context, "Email or Password incorect");
+    }
+
+    } catch (e) {
+      print("-------------------------${e}------------------");
     }
     
   }

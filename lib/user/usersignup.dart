@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/helper/serverHelper.dart';
 import 'package:food_order/toastification/error.dart';
+import 'package:food_order/toastification/info.dart';
 import 'package:food_order/toastification/sucess.dart';
 import 'package:food_order/user/uesOTP.dart';
 import 'package:food_order/user/userSignIn.dart';
@@ -79,12 +80,13 @@ class _UserSignUpState extends State<UserSignUp> {
 
         if (ty == 200) {
           showSucessMessage(context, "User added sucessfully");
-        } else {
-          showErrorMessage(context, "Something went wrong");
+          Navigator.of(context,).pushReplacement(MaterialPageRoute(builder: (context) => UseOTP()));
+        } else if(ty == 201) {
+          showInfoMessage(context, "User already exists please login");
+        }else{
+          showErrorMessage(context, "Something went wrong${ty}");
         }
-        Navigator.of(
-          context,
-        ).pushReplacement(MaterialPageRoute(builder: (context) => UseOTP()));
+        
       } catch (e) {
         print(e);
       }

@@ -32,10 +32,18 @@ class ServerHelper {
         },
       );
 
-      return response.statusCode ?? 0;
+      if (response.statusCode == 200) {
+        print("Sucessful");
+        return response.statusCode!;
+      } else {
+        print("Not sucessful");
+        return response.statusCode!;
+      }
+
     } catch (e) {
-      return 0;
+      print("-------------------------${e}--------------------------");
     }
+    return 0;
   }
 
   // -------------------------------
@@ -49,6 +57,8 @@ class ServerHelper {
         "password": password,
       },
     );
+
+    print("rrrrrrrrrrrrrr${response.data}rrrrrrrrrrrrrrr");
 
     final token = response.data['token'];
     await _storage.write(key: 'token', value: token);
