@@ -31,29 +31,30 @@ class _RestSignUpState extends State<RestSignUp> {
   void next()async{
     if (formKey.currentState!.validate()) {
       //Send email to get varification otp
-      try {
-        var ty = await ServerHelper().postUser(
-          nameController.text,
-          emailController.text,
-          "iospxqgwiyypeihaeiorgqegiqur79eiufae3dguygweo 726dwu",
-          "Usertype.Restaurant",
-          passwordController.text,
-          long.toString(),
-          lat.toString(),
-        );
+      // try {
+      //   var ty = await ServerHelper().postUser(
+      //     nameController.text,
+      //     emailController.text,
+      //     "",
+      //     "Usertype.Restaurant",
+      //     passwordController.text,
+      //     long.toString(),
+      //     lat.toString(),
+      //     descriptionController.text
+      //   );
 
-        if (ty == 200) {
-          showSucessMessage(context, "User added sucessfully");
-          Navigator.of(context,).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));
-        } else if(ty == 201) {
-          showInfoMessage(context, "User already exists please login");
-        }else{
-          showErrorMessage(context, "Something went wrong${ty}");
-        }
+      //   if (ty == 200) {
+      //     showSucessMessage(context, "User added sucessfully");
+      //     Navigator.of(context,).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));
+      //   } else if(ty == 201) {
+      //     showInfoMessage(context, "User already exists please login");
+      //   }else{
+      //     showErrorMessage(context, "Something went wrong${ty}");
+      //   }
         
-      } catch (e) {
-        print(e);
-      }
+      // } catch (e) {
+      //   print(e);
+      // }
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));
     }
   }

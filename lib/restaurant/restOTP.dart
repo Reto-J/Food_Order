@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/restaurant/navpages/resthome.dart';
+import 'package:food_order/restaurant/restPic.dart';
 import 'package:food_order/widget/customTextField.dart';
 import 'package:food_order/widget/custombutton.dart';
 
@@ -21,7 +22,7 @@ class _RestOTPState extends State<RestOTP> {
     bool test = fiController.text + seController.text + thController.text + foController.text == "1111";
     if (test) {
       //Email verified sucessfuly
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestHome()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestPic()));
       print("yes");
     }else{
       print("Something went wrong");
@@ -80,7 +81,7 @@ class _RestOTPState extends State<RestOTP> {
                   ]
                 ),
                 SizedBox(height: 100),
-                Custombutton(text: "Confirm", onPressed: (){})
+                Custombutton(text: "Confirm", onPressed: (){confirm();})
               ],
             ),
           ),

@@ -17,6 +17,7 @@ class ServerHelper {
     String password,
     String long,
     String lat,
+    String? description,
   ) async {
     try {
       final response = await _dio.post(
@@ -29,6 +30,7 @@ class ServerHelper {
           "password": password,
           "long": long,
           "lat": lat,
+          "description": description,
         },
       );
 
@@ -39,7 +41,6 @@ class ServerHelper {
         print("Not sucessful");
         return response.statusCode!;
       }
-
     } catch (e) {
       print("-------------------------${e}--------------------------");
     }
@@ -52,13 +53,10 @@ class ServerHelper {
   Future<int> logUserIn(String email, String password) async {
     final response = await _dio.post(
       '/users/login',
-      data: {
-        "email": email,
-        "password": password,
-      },
+      data: {"email": email, "password": password},
     );
 
-    print("rrrrrrrrrrrrrr${response.data}rrrrrrrrrrrrrrr");
+    print("---------------${response.data}----------------");
 
     final token = response.data['token'];
     await _storage.write(key: 'token', value: token);
@@ -80,11 +78,23 @@ class ServerHelper {
   Future<List<Map<String, dynamic>>> getRestaurants() async {
     final response = await _dio.get(
       '/users',
-      queryParameters: {
-        'route': 'Usertype.restaurant',
-      },
+      queryParameters: {'route': 'Usertype.restaurant'},
     );
 
     return List<Map<String, dynamic>>.from(response.data);
+  }
+
+  // -------------------------------
+  // UPDATE USER PROPERTRIES
+  // -------------------------------
+  Future<bool> updateUser(Map<String, dynamic> updates) async {
+    try {
+      final response = await _dio.put('/users/me', data: updates);
+
+      return response.statusCode == 200;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 }
