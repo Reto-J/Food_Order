@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/data/food_categories.dart';
 import 'package:food_order/helper/serverHelper.dart';
 import 'package:food_order/toastification/error.dart';
 
@@ -109,13 +110,46 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 SizedBox(height: 20),
+                SizedBox(
+                  height: 60, // height of the horizontal list
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: food_categories.length,
+                    itemBuilder: (context, index) {
+                      var food_category = food_categories[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: GestureDetector(
+                          onTap: () {
+                            print("Reto --- ${food_category["Category"]}");
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: SizedBox(
+                              width: 60, // ✅ WIDTH is required
+                              child: Center(
+                                child: Text(
+                                  food_category["icon"] ?? "⁉️",
+                                  style: const TextStyle(fontSize: 30),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
                     itemCount: restaurants.length,
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
-                          leading: Text(restaurants[index]["name"]),
+                          leading: Text(restaurants[index]["name"] ?? "No Name"),
                         ),
                       );
                     },
