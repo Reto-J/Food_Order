@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:food_order/helper/serverHelper.dart';
 import 'package:food_order/restaurant/restHomPage.dart';
+import 'package:food_order/restaurant/restOTP.dart';
 import 'package:food_order/toastification/error.dart';
 import 'package:food_order/toastification/sucess.dart';
 import 'package:food_order/widget/custombutton.dart';
@@ -110,7 +111,7 @@ class _RestPicState extends State<RestPic> {
                     Expanded(
                       child: Custombutton(
                         text: "Skip",
-                        onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestHomPage()));},
+                        onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));},
                         brColor: Colors.white,
                         fgColor: Colors.green,
                       ),
