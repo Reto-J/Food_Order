@@ -26,6 +26,7 @@ class _CustombuttonState extends State<Custombutton> {
       child: ElevatedButton(
         onPressed: widget.onPressed,
         style: ElevatedButton.styleFrom(
+              elevation: 6,
               backgroundColor: widget.brColor ?? Colors.green,
               foregroundColor: widget.fgColor,
               shape: RoundedRectangleBorder(

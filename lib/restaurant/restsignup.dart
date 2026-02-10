@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_order/helper/serverHelper.dart';
 import 'package:food_order/restaurant/restOTP.dart';
 import 'package:food_order/restaurant/restPic.dart';
@@ -56,6 +57,7 @@ class _RestSignUpState extends State<RestSignUp> {
       // } catch (e) {
       //   print(e);
       // }
+      HapticFeedback.mediumImpact();
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestPic()));
     }
   }
