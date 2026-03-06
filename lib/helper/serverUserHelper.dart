@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import '../network/dio_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class ServerHelper {
+class ServerUserHelper {
   final Dio _dio = DioClient().dio;
   final _storage = const FlutterSecureStorage();
 
@@ -68,7 +68,7 @@ class ServerHelper {
   // GET CURRENT USER
   // -------------------------------
   Future<Map<String, dynamic>> getUser() async {
-    final response = await _dio.get('/me');
+    final response = await _dio.get('/users/me');
     return response.data;
   }
 
@@ -77,7 +77,7 @@ class ServerHelper {
   // -------------------------------
   Future<List<Map<String, dynamic>>> getRestaurants() async {
     final response = await _dio.get(
-      '/users',
+      '/restaurants',
       queryParameters: {'route': 'Usertype.restaurant'},
     );
 

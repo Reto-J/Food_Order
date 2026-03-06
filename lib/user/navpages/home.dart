@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/data/food_categories.dart';
-import 'package:food_order/helper/serverHelper.dart';
+import 'package:food_order/helper/serverUserHelper.dart';
 import 'package:food_order/toastification/error.dart';
 
 class Home extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
 
   void loadUser() async {
     try {
-      Map<String, dynamic> user = await ServerHelper().getUser();
+      Map<String, dynamic> user = await ServerUserHelper().getUser();
       setState(() {
         User = user;
       });
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
 
   void loadRestaurants() async {
     try {
-      List<dynamic> wait = await ServerHelper().getRestaurants();
+      List<dynamic> wait = await ServerUserHelper().getRestaurants();
 
       if (wait.isEmpty) {
         print("something went wrong");
@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 50, 15, 15),
+            padding: const EdgeInsets.fromLTRB(15, 90, 15, 15),
             child: Column(
               children: [
                 Row(

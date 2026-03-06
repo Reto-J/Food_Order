@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:food_order/helper/serverHelper.dart';
-import 'package:food_order/restaurant/restHomPage.dart';
+import 'package:food_order/helper/serverRestHelper.dart';
 import 'package:food_order/restaurant/restOTP.dart';
 import 'package:food_order/toastification/error.dart';
 import 'package:food_order/toastification/sucess.dart';
@@ -19,23 +18,7 @@ class RestPic extends StatefulWidget {
 
 class _RestPicState extends State<RestPic> {
 
-  void addPIc()async{
-    try {
-      
-  bool sucessful =  await ServerHelper().updateUser({"image" : base64Image});
-
-  if (sucessful) {
-    showSucessMessage(context, "Image added sucessfully");
-  } else {
-    showErrorMessage(context, "Something went wrong");
-  }
-
-    } catch (e) {
-      print(e);
-    }
-  }
-
-
+  
   String? base64Image;
   final ImagePicker _picker = ImagePicker();
 
@@ -48,6 +31,22 @@ class _RestPicState extends State<RestPic> {
     setState(() {
       base64Image = base64Encode(bytes);
     });
+  }
+
+  void addPIc() async {
+    try {
+      bool sucessful = await ServerRestHelper().updateRest({
+        "image": base64Image,
+      });
+
+      if (sucessful) {
+        showSucessMessage(context, "Image added sucessfully");
+      } else {
+        showErrorMessage(context, "Something went wrong");
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -68,7 +67,7 @@ class _RestPicState extends State<RestPic> {
               children: [
                 Text(
                   "Add a picture your restaurant",
-                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 SizedBox(height: 20),
                 GestureDetector(
@@ -93,7 +92,7 @@ class _RestPicState extends State<RestPic> {
                             ),
                           )
                         : ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(15),
                             child: Image.memory(
                               base64Decode(base64Image!),
                               fit: BoxFit.cover,
@@ -105,13 +104,22 @@ class _RestPicState extends State<RestPic> {
                 Row(
                   children: [
                     Expanded(
-                      child: Custombutton(text: "Add", onPressed: () {addPIc();}),
+                      child: Custombutton(
+                        text: "Add",
+                        onPressed: () {
+                          addPIc();
+                        },
+                      ),
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: Custombutton(
                         text: "Skip",
-                        onPressed: () {Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(builder: (context) => RestOTP()),
+                          );
+                        },
                         brColor: Colors.white,
                         fgColor: Colors.green,
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/widget/rating_widget.dart';
 
 class RestHome extends StatefulWidget {
   const RestHome({super.key});
@@ -8,6 +9,7 @@ class RestHome extends StatefulWidget {
 }
 
 class _RestHomeState extends State<RestHome> {
+  double rating = 3;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +25,7 @@ class _RestHomeState extends State<RestHome> {
                     children: [
                       CircleAvatar(child: Text('Image'),radius: 25),
                       SizedBox(width: 20),
-                      Icon(Icons.star_border_outlined),
+                      RatingWidget(rating: 3.5,)
                     ],
                   ),
                   IconButton(onPressed: (){}, icon: Icon(Icons.menu))
@@ -39,12 +41,17 @@ class _RestHomeState extends State<RestHome> {
                         padding: const EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            Row(children: [
-                              CircleAvatar(child: Text("Image"),radius: 25),
-                              SizedBox(width: 8),
-                              Text("Name"),
-                              SizedBox(width: 150),
-                              Icon(Icons.star_outline),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(child: Text("Image"),radius: 25),
+                                  SizedBox(width: 8),
+                                  Text("Name"),
+                                ],
+                              ),
+                              RatingWidget()
                             ],),
                             SizedBox(height: 10),
                             Text("I/flutter (24063): ---------------{token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTYwZjBkMWUxNmU5YjI1MzI1Njg0ZTYiLCJpYXQiOjE3Njg1Njk5MzksImV4cCI6MTc4NDEyMTkzOX0.XYKwwgNAJiGkwyKL-opAEiGdW8gKo60NezI4Llm2qjg, role: Usertype.user}----------------",)

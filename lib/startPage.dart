@@ -43,7 +43,7 @@ class _StartpageState extends State<Startpage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("icon.png",width: 100,height: 100),
+              Image.asset("./icon/icon.png",width: 100,height: 100),
               // Icon(Icons.food_bank_outlined,size: 180,color: Colors.green,),
               SizedBox(height: 10),
               Text("Order",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.green),),

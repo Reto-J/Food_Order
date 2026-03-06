@@ -30,7 +30,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 50, 15, 15),
+        padding: const EdgeInsets.fromLTRB(15, 90, 15, 15),
         child: Column(
           children: [
             Text("Profile"),

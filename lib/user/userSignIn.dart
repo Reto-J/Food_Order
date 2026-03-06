@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_order/helper/serverHelper.dart';
+import 'package:food_order/helper/serverUserHelper.dart';
 import 'package:food_order/toastification/error.dart';
 import 'package:food_order/toastification/sucess.dart';
 import 'package:food_order/user/homepage.dart';
@@ -23,7 +23,7 @@ class _UserSigninState extends State<UserSignin> {
     //Login function
 
     try {
-          int ty = await ServerHelper().logUserIn(emailController.text, passwordController.text);
+          int ty = await ServerUserHelper().logUserIn(emailController.text, passwordController.text);
 
     if (ty == 200) {
       showSucessMessage(context, "Login Sucessful 👍👍👍");

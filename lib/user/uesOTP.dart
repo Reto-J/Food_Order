@@ -47,7 +47,7 @@ class _UseOTPState extends State<UseOTP> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(15, 90, 15, 15),
           child: Center(
             child: Column(
               children: [

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_order/helper/serverHelper.dart';
+import 'package:food_order/helper/serverUserHelper.dart';
 import 'package:food_order/toastification/error.dart';
 import 'package:food_order/toastification/info.dart';
 import 'package:food_order/toastification/sucess.dart';
@@ -68,7 +68,7 @@ class _UserSignUpState extends State<UserSignUp> {
   void next() async {
     if (formKey.currentState!.validate()) {
       try {
-        var ty = await ServerHelper().postUser(
+        var ty = await ServerUserHelper().postUser(
           nameController.text,
           emailController.text,
           "iospxqg7wexqwygw82 3dguygweo 726dwu",
