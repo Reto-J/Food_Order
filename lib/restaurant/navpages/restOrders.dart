@@ -9,31 +9,33 @@ class RestOrders extends StatefulWidget {
 }
 
 class _RestOrdersState extends State<RestOrders> {
-
   final socketService = SocketService();
 
-  String userId = "No oredrs yet";
+  String userId = "No orders yet";
 
-@override
-void initState() {
-  super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  socketService.connect("restaurant4567", "restaurant");
+    socketService.connect("restaurant4567", "restaurant");
 
-  socketService.socket.on("restaurantJoinOrder", (data) {
-    print("New order from: ${data["userId"]}");
-
-    setState(() {
-      userId = data["userId"];
+    socketService.socket.on("restaurantJoinOrder", (data) {
+      changeName();
+      print("New order from: ${data["userId"]}...---...");
     });
-  });
-}
+  }
 
+  void changeName() {
+    setState(() {
+      print("changing Name ......");
+      userId = "userId_Nigga_It_Worked";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(userId,style: TextStyle(fontSize: 50, color: Colors.green),),
+      child: Text(userId, style: TextStyle(fontSize: 50, color: Colors.green)),
     );
   }
 }

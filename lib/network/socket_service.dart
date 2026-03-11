@@ -7,12 +7,10 @@ class SocketService {
     socket = IO.io(
       'http://localhost:8000',
       IO.OptionBuilder()
-      .setTransports(['websocket'])
-      .disableAutoConnect()
-      .setQuery({
-        "userId": userId,
-        "role": role,
-      }).build(),
+          .setTransports(['websocket'])
+          .disableAutoConnect()
+          .setQuery({"userId": userId, "role": role})
+          .build(),
     );
 
     socket.connect();
@@ -23,6 +21,13 @@ class SocketService {
 
     socket.onDisconnect((_) {
       print('❌ Disconnected from server');
+    });
+
+    //👇 LISTEN FOR NEW ORDERS
+    socket.on("orderCreated", (data) {
+      print("New order received: ${data['orderId']}");
+
+      socket.emit("restaurantJoinOrder", {"orderId": data['orderId']});
     });
 
     // Listen for messages from backend
@@ -37,7 +42,7 @@ class SocketService {
       // 'restaurantId': restaurantId,
       // 'foodIds': foodIds,
       // "userId": userId,
-      "restaurantId": restaurantId
+      "restaurantId": restaurantId,
     });
   }
 }
