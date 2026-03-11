@@ -3,11 +3,17 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class SocketService {
   late IO.Socket socket;
 
-  void connect() {
-    socket = IO.io('http://localhost:8000', <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': false,
-    });
+  void connect(String userId, String role) {
+    socket = IO.io(
+      'http://localhost:8000',
+      IO.OptionBuilder()
+      .setTransports(['websocket'])
+      .disableAutoConnect()
+      .setQuery({
+        "userId": userId,
+        "role": role,
+      }).build(),
+    );
 
     socket.connect();
 
@@ -20,16 +26,18 @@ class SocketService {
     });
 
     // Listen for messages from backend
-    socket.on('receive_message', (data) {
+    socket.on('orderCreated', (data) {
       print('📩 New message: $data');
     });
   }
 
-  void sendOrder(String foodIds, String restaurantId, String userId,) {
-    socket.emit('send_message', {
-      'restaurantId': restaurantId,
-      'foodIds': foodIds,
-      "userId" : userId
+  void createOrder(String foodIds, String restaurantId, String userId) {
+    print("Sending Order");
+    socket.emit('createOrder', {
+      // 'restaurantId': restaurantId,
+      // 'foodIds': foodIds,
+      // "userId": userId,
+      "restaurantId": restaurantId
     });
   }
 }

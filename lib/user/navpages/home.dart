@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/data/food_categories.dart';
 import 'package:food_order/helper/serverUserHelper.dart';
+import 'package:food_order/network/socket_service.dart';
 import 'package:food_order/toastification/error.dart';
 
 class Home extends StatefulWidget {
@@ -11,10 +12,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final socketService = SocketService();
+
   @override
   void initState() {
-    loadRestaurants();
     super.initState();
+    loadRestaurants();
+    socketService.connect("user5467", "user");
   }
 
   List<dynamic> restaurants = [];

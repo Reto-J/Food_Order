@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/network/socket_service.dart';
 import 'package:food_order/widget/rating_widget.dart';
 
 class RestHome extends StatefulWidget {
@@ -9,6 +10,15 @@ class RestHome extends StatefulWidget {
 }
 
 class _RestHomeState extends State<RestHome> {
+
+final socketService = SocketService();
+  
+  @override
+  void initState() {
+    super.initState();
+    socketService.connect("restaurant4567", "restaurant");
+  }
+
   double rating = 3;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +38,7 @@ class _RestHomeState extends State<RestHome> {
                       RatingWidget(rating: 3.5,)
                     ],
                   ),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.menu))
+                  IconButton(onPressed: (){socketService.connect("restaurant4567", "restaurant");}, icon: Icon(Icons.menu))
                 ],
               ),
               SizedBox(height: 20),

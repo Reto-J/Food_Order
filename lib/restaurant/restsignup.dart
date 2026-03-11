@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_order/helper/serverRestHelper.dart';
+import 'package:food_order/restaurant/restOTP.dart';
 import 'package:food_order/restaurant/restPic.dart';
 import 'package:food_order/restaurant/restsignin.dart';
+import 'package:food_order/toastification/error.dart';
+import 'package:food_order/toastification/info.dart';
+import 'package:food_order/toastification/sucess.dart';
 import 'package:food_order/widget/customTextField.dart';
 import 'package:food_order/widget/custombutton.dart';
 import 'package:food_order/widget/multilieTextfield.dart';
@@ -28,33 +32,33 @@ class _RestSignUpState extends State<RestSignUp> {
 
   void next()async{
     if (formKey.currentState!.validate()) {
-      //Send email to get varification otp
-      // try {
-      //   var ty = await ServerHelper().postUser(
-      //     nameController.text,
-      //     emailController.text,
-      //     "",
-      //     "Usertype.Restaurant",
-      //     passwordController.text,
-      //     long.toString(),
-      //     lat.toString(),
-      //     descriptionController.text
-      //   );
+      // Send email to get varification otp
+      try {
+        var ty = await ServerRestHelper().postRest(
+          nameController.text,
+          emailController.text,
+          "",
+          "Usertype.Restaurant",
+          passwordController.text,
+          long.toString(),
+          lat.toString(),
+          descriptionController.text
+        );
 
-      //   if (ty == 200) {
-      //     showSucessMessage(context, "User added sucessfully");
-      //     Navigator.of(context,).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));
-      //   } else if(ty == 201) {
-      //     showInfoMessage(context, "User already exists please login");
-      //   }else{
-      //     showErrorMessage(context, "Something went wrong${ty}");
-      //   }
-        
-      // } catch (e) {
-      //   print(e);
-      // }
-      HapticFeedback.mediumImpact();
+        if (ty == 200) {
+          showSucessMessage(context, "User added sucessfully");
+          // Navigator.of(context,).pushReplacement(MaterialPageRoute(builder: (context) => RestOTP()));
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RestPic()));
+        } else if(ty == 201) {
+          showInfoMessage(context, "User already exists please login");
+        }else{
+          showErrorMessage(context, "Something went wrong${ty}");
+        }
+        
+      } catch (e) {
+        print(e);
+      }
+      HapticFeedback.mediumImpact();
     }
   }
 
