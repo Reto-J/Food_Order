@@ -16,7 +16,15 @@ final socketService = SocketService();
   @override
   void initState() {
     super.initState();
-    socketService.connect("restaurant4567", "restaurant");
+    connectRest();
+  }
+
+  void connectRest(){
+    try {
+          socketService.connect("restaurant4567", "restaurant");
+    } catch (e) {
+      print("++++++++++++++++++++++++++++++${e}+++++++++++++++++++");
+    }
   }
 
   double rating = 3;

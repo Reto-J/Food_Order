@@ -31,9 +31,9 @@ class SocketService {
     });
 
     // Listen for messages from backend
-    socket.on('orderCreated', (data) {
-      print('📩 New message: $data');
-    });
+    // socket.on('orderCreated', (data) {
+    //   print('📩 New message: $data');
+    // });
   }
 
   void createOrder(String foodIds, String restaurantId, String userId) {

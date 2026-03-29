@@ -19,17 +19,24 @@ class _RestOrdersState extends State<RestOrders> {
 
     socketService.connect("restaurant4567", "restaurant");
 
-    socketService.socket.on("restaurantJoinOrder", (data) {
-      changeName();
-      print("New order from: ${data["userId"]}...---...");
+    socketService.socket.off("orderCreated"); // prevent duplicates
+
+    socketService.socket.on("orderCreated", (data) {
+      print("New order received: ${data["orderId"]}");
+
+      if (!mounted) return;
+
+      setState(() {
+        print("changing Name ......");
+        userId = data["orderId"] ?? "Unknown Order";
+      });
     });
   }
 
-  void changeName() {
-    setState(() {
-      print("changing Name ......");
-      userId = "userId_Nigga_It_Worked";
-    });
+  @override
+  void dispose() {
+    socketService.socket.off("orderCreated"); // cleanup
+    super.dispose();
   }
 
   @override
